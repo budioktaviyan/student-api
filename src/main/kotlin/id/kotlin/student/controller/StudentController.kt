@@ -2,6 +2,7 @@ package id.kotlin.student.controller
 
 import id.kotlin.student.model.Student
 import id.kotlin.student.service.StudentService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -52,6 +53,26 @@ class StudentController(private val service: StudentService) {
     @PostMapping("v1/student")
     fun add(@RequestBody student: Student): Map<String, String> {
         service.add(student)
+
+        val map: HashMap<String, String> = HashMap()
+        map["message"] = "Success"
+
+        return map
+    }
+
+    @DeleteMapping("v1/student/all")
+    fun delete(): Map<String, String> {
+        service.delete()
+
+        val map: HashMap<String, String> = HashMap()
+        map["message"] = "Success"
+
+        return map
+    }
+
+    @DeleteMapping("v1/student")
+    fun deleteById(@RequestParam id: Long): Map<String, String> {
+        service.deleteById(id)
 
         val map: HashMap<String, String> = HashMap()
         map["message"] = "Success"
