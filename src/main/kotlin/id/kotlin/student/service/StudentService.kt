@@ -17,6 +17,10 @@ class StudentService(private val repository: StudentRepository) {
         repository.save(student)
     }
 
+    fun edit(student: Student) {
+        repository.update(student.id, student.name, student.email)
+    }
+
     fun delete() {
         repository.deleteAll()
     }

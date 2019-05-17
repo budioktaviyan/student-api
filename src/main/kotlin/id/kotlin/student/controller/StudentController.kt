@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -23,7 +24,7 @@ class StudentController(private val service: StudentService) {
         return map
     }
 
-    @GetMapping("/v1/student")
+    @GetMapping("v1/student")
     fun student(): Map<String, List<Student>> {
         val student = service.student()
         val map: HashMap<String, List<Student>> = HashMap()
@@ -32,7 +33,7 @@ class StudentController(private val service: StudentService) {
         return map
     }
 
-    @GetMapping("/v1/student/{id}")
+    @GetMapping("v1/student/{id}")
     fun studentById(@PathVariable id: Long): Map<String, Student> {
         val student = service.studentById(id)
         val map: HashMap<String, Student> = HashMap()
@@ -41,7 +42,7 @@ class StudentController(private val service: StudentService) {
         return map
     }
 
-    @GetMapping("/v1/student/search")
+    @GetMapping("v1/student/search")
     fun studentByEmail(@RequestParam email: String): Map<String, Student> {
         val student = service.studentByEmail(email)
         val map: HashMap<String, Student> = HashMap()
@@ -53,6 +54,16 @@ class StudentController(private val service: StudentService) {
     @PostMapping("v1/student")
     fun add(@RequestBody student: Student): Map<String, String> {
         service.add(student)
+
+        val map: HashMap<String, String> = HashMap()
+        map["message"] = "Success"
+
+        return map
+    }
+
+    @PutMapping("v1/student")
+    fun edit(@RequestBody student: Student): Map<String, String> {
+        service.edit(student)
 
         val map: HashMap<String, String> = HashMap()
         map["message"] = "Success"
