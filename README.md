@@ -1,2 +1,2 @@
-# student-api
+# Student API
 Simple Student API
